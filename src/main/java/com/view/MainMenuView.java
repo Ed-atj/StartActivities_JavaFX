@@ -1,44 +1,25 @@
 package com.view;
 
-import com.utility.PrimaryStageGetSet;
-import javafx.application.Application;
-import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
+import javafx.scene.layout.AnchorPane;
 
+import java.io.IOException;
 
-public class MainMenuView{
+public class MainMenuView {
+	
+// Page 1
+    public static Scene createScene() {
+        try {
+            FXMLLoader loader = new FXMLLoader(MainMenuView.class.getResource("/com/view/MainMenuView.fxml"));
+            Parent root = loader.load();
+            return new Scene(root, 480, 400);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return new Scene(new AnchorPane(), 480, 400);
 
-    @FXML
-    private Label buttonPrimaryStage;
-    //Create scene class
-    @FXML
-    public Scene sceneCreate(Application application){
-
-
-        Button button1 = new Button("Atividade 1");
-        Button button2 = new Button("Atividade 2");
-
-
-        button1.setOnAction(event -> ToActivity1(application));
-        button2.setOnAction(event -> ToActivity2(application));
-
-
-        VBox root = new VBox(10, button1, button2);
-        return new Scene(root, 300, 200);
-    }
-
-    public void ToActivity1(Application application){
-    Stage stage = (Stage) PrimaryStageGetSet.getPrimaryStage().getScene().getWindow();
-    stage.setScene(Activity1View.sceneCreate());
-
-    }
-    public void ToActivity2(Application application){
-        Stage stage = (Stage) PrimaryStageGetSet.getPrimaryStage().getScene().getWindow();
-        stage.setScene(Activity2View.sceneCreate());
-
+        }
+        
     }
 }
